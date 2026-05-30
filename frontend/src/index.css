@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0a0a0f;
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Custom Scrollbar ────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(220, 38, 38, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(220, 38, 38, 0.7);
+}
+
+/* ─── Glassmorphism ───────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-red {
+  background: rgba(220, 38, 38, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.glass-blue {
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* ─── Emergency Grid Background ──────────────────────────────────────────── */
+.emergency-grid-bg {
+  background-color: #0a0a0f;
+  background-image:
+    linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.emergency-radial-bg {
+  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.08) 0%, transparent 70%),
+    #0a0a0f;
+}
+
+/* ─── SOS Button Animations ───────────────────────────────────────────────── */
+.sos-button {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ef4444 0%, #dc2626 50%, #991b1b 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow:
+    0 0 30px rgba(220, 38, 38, 0.5),
+    0 0 60px rgba(220, 38, 38, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  transition: transform 0.1s ease, box-shadow 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sos-button:active {
+  transform: scale(0.96);
+}
+
+.sos-button.active {
+  animation: sos-glow 1.5s ease-in-out infinite alternate;
+}
+
+.sos-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(220, 38, 38, 0.6);
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+.sos-ring:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.sos-ring:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes sos-glow {
+  0% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.5), 0 0 40px rgba(220, 38, 38, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(220, 38, 38, 0.9), 0 0 100px rgba(220, 38, 38, 0.6), 0 0 150px rgba(220, 38, 38, 0.3);
+  }
+}
+
+/* ─── Emergency Shimmer ───────────────────────────────────────────────────── */
+.emergency-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(220, 38, 38, 0) 0%,
+    rgba(220, 38, 38, 0.3) 50%,
+    rgba(220, 38, 38, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: emergency-shimmer 2s linear infinite;
+}
+
+@keyframes emergency-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Ambulance Moving Animation ─────────────────────────────────────────── */
+.ambulance-moving {
+  animation: ambulance-bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes ambulance-bounce {
+  0% { transform: translateY(0px) rotate(-2deg); }
+  100% { transform: translateY(-4px) rotate(2deg); }
+}
+
+/* ─── Status Pulse ────────────────────────────────────────────────────────── */
+.status-pulse-green {
+  animation: status-pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+}
+
+.status-pulse-red {
+  animation: status-pulse-red 1s ease-in-out infinite;
+}
+
+@keyframes status-pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
+  50% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+}
+
+/* ─── CPR Rhythm Animation ────────────────────────────────────────────────── */
+.cpr-compress {
+  animation: cpr-compress 0.6s ease-in-out infinite;
+}
+
+@keyframes cpr-compress {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.85); }
+}
+
+/* ─── Map Marker Pulse ────────────────────────────────────────────────────── */
+.map-marker-pulse {
+  animation: map-marker-pulse 2s ease-out infinite;
+}
+
+@keyframes map-marker-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ─── Gradient Text ───────────────────────────────────────────────────────── */
+.gradient-text-red {
+  background: linear-gradient(135deg, #ef4444, #dc2626, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Card Hover Effects ──────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Emergency Alert Banner ──────────────────────────────────────────────── */
+.emergency-banner {
+  background: linear-gradient(90deg, #dc2626, #b91c1c, #dc2626);
+  background-size: 200% 100%;
+  animation: emergency-shimmer 3s linear infinite;
+}
+
+/* ─── Leaflet Map Overrides ───────────────────────────────────────────────── */
+.leaflet-container {
+  background: #1a1a2e !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.leaflet-tile {
+  filter: brightness(0.8) saturate(0.9) hue-rotate(180deg) invert(1);
+}
+
+.leaflet-control-zoom a {
+  background: rgba(10, 10, 15, 0.9) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ─── Form Inputs ─────────────────────────────────────────────────────────── */
+.input-dark {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-dark:focus {
+  border-color: rgba(220, 38, 38, 0.5);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.input-dark::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ─── Bottom Sheet ────────────────────────────────────────────────────────── */
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 15, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px 24px 0 0;
+  padding: 20px;
+  z-index: 100;
+}
+
+/* ─── Loading Skeleton ────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Utility Classes ─────────────────────────────────────────────────────── */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
